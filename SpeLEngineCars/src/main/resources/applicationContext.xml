@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="engine" class="com.intellekta.models.Engine">
+        <property name="capacity" value="3200"/>
+        <property name="horsePower" value="250"/>
+        <property name="numberOfCylinders" value="6"/>
+    </bean>
+
+    <bean id="car" class="com.intellekta.models.Car">
+        <property name="make" value="Toyota"/>
+        <property name="model" value="Camry"/>
+        <property name="engine" ref="engine"/>
+        <property name="horsePower" value="#{engine.horsePower}"/>
+    </bean>
+
+    <bean id="carTester" class="com.intellekta.service.CarTester">
+        <property name="goodCar" value="#{car.horsePower ge 250 and car.engine.capacity le 4000}"/>
+        <property name="greatCar" value="#{car.horsePower gt 300 and car.engine.capacity gt 3000}"/>
+        <property name="carInfo" value="#{car.model + ' manufactured by ' + car.make}"/>
+    </bean>
+</beans>
