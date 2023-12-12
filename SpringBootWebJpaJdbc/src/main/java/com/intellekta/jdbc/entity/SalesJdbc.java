@@ -17,6 +17,6 @@ public class SalesJdbc {
     private int price;
     private Date receipt_of_goods;
     private Date sale_of_goods;
-    private int id_of_product;
+    private int id_product;
 
 }

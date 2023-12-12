@@ -4,9 +4,11 @@ import com.intellekta.jpa.entity.SalesEntity;
 import com.intellekta.jpa.repository.JpaRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
+@SuppressWarnings("unused")
 public class JpaService {
 
     private static JpaRepo jpaRepo;
@@ -15,7 +17,7 @@ public class JpaService {
         JpaService.jpaRepo = repo;
     }
 
-    public static Long getCountOfProducts() {
+    public static Long getCountOfSales() {
         return jpaRepo.count();
     }
 
@@ -25,5 +27,13 @@ public class JpaService {
             return optEnt.get();
         else System.out.println("Значения с таким id: " + id + " не существует");
         return null;
+    }
+
+    public static void addDataToDb(SalesEntity entity) {
+        jpaRepo.save(entity);
+    }
+
+    public static List<SalesEntity> getRowsWithPriceMoreThen100() {
+        return jpaRepo.findAll().stream().filter(entity -> entity.getPrice() > 100).toList();
     }
 }
