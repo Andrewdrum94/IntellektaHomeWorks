@@ -1,13 +1,11 @@
 package com.intellekta.jdbc.entity;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 import java.sql.Date;
 
 @Getter
 @Setter
-@Component
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor

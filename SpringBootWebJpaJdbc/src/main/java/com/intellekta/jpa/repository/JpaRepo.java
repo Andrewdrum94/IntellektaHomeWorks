@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository("jpa")
 public interface JpaRepo extends JpaRepository<SalesEntity, Long> {
+
+//    @Query(nativeQuery = true, value = "")
+//    Optional<SalesEntity> findByPrice(Integer price);
 }

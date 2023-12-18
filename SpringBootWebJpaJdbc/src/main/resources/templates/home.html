@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Sales</title>
+    <style>
+        .wrapper {
+            list-style-type: none;
+            padding: 0;
+            border-radius: 3px;
+            width: 380px;
+        }
+        .form-row {
+            display: flex;
+            justify-content: flex-end;
+            padding: .5em;
+        }
+        .form-row > label {
+            padding: .5em 1em .5em 0;
+            flex: 1;
+        }
+        .form-row > input {
+            flex: 2;
+        }
+        .form-row > input,
+        .form-row > button {
+            padding: .5em;
+        }
+        .form-row > button {
+            background: gray;
+            color: white;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+<h1>TechIndustry</h1>
+<p th:text="|Good day to you, ${name}!|"></p>
+<div th:switch="${sales}">
+    <h2 th:case="null">No Users found</h2>
+    <div th:case="*">
+        <h2>Sales</h2>
+        <table border="1">
+            <thead>
+            <tr align="center">
+                <th>Id</th>
+                <th>Price</th>
+                <th>Receipt of Goods</th>
+                <th>Sale of goods</th>
+                <th>Id of product</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="salesEntity : ${sales}" align="center">
+                <td th:text="${salesEntity.id}"></td>
+                <td th:text="${salesEntity.price}"></td>
+                <td th:text="${salesEntity.receipt_of_goods}"></td>
+                <td th:text="${salesEntity.sale_of_goods}"></td>
+                <td th:text="${salesEntity.id_product}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<p>Чтобы добавить информацию в БД, заполните все поля:</p>
+<form th:action="@{/home}" method="post">
+    <ul class="wrapper">
+        <li class="form-row">
+            <label for="id">Id</label>
+            <input type="text" id="id" name="id"/>
+        </li>
+        <li class="form-row">
+            <label for="price">Price</label>
+            <input type="text" id="price" name="price"/>
+        </li>
+        <li class="form-row">
+            <label for="receipt">Receipt of goods</label>
+            <input type="text" id="receipt" name="receipt_of_goods"/>
+        </li>
+        <li class="form-row">
+            <label for="sale">Sale of goods</label>
+            <input type="text" id="sale" name="sale_of_goods"/>
+        </li>
+        <li class="form-row">
+            <label for="id_product">Product</label>
+            <input type="text" id="id_product" name="id_product"/>
+        </li>
+        <li class="form-row">
+            <input type="submit" value="Отправить">
+        </li>
+    </ul>
+</form>
+</body>

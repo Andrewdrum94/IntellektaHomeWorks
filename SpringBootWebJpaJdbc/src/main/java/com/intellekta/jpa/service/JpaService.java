@@ -11,17 +11,17 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 public class JpaService {
 
-    private static JpaRepo jpaRepo;
+    private final JpaRepo jpaRepo;
 
     public JpaService(JpaRepo repo) {
-        JpaService.jpaRepo = repo;
+        jpaRepo = repo;
     }
 
-    public static Long getCountOfSales() {
+    public Long getCountOfSales() {
         return jpaRepo.count();
     }
 
-    public static SalesEntity getEntityById(long id) {
+    public  SalesEntity getEntityById(long id) {
         Optional<SalesEntity> optEnt = jpaRepo.findById(id);
         if (optEnt.isPresent())
             return optEnt.get();
@@ -29,11 +29,11 @@ public class JpaService {
         return null;
     }
 
-    public static void addDataToDb(SalesEntity entity) {
+    public void addDataToDb(SalesEntity entity) {
         jpaRepo.save(entity);
     }
 
-    public static List<SalesEntity> getRowsWithPriceMoreThen100() {
+    public List<SalesEntity> getRowsWithPriceMoreThen100() {
         return jpaRepo.findAll().stream().filter(entity -> entity.getPrice() > 100).toList();
     }
 }
